@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code · Center Interface</title>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest">
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0b1a2e 0%, #1a2f3f 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      padding: 1.5rem;
+    }
+
+    .glass-panel {
+      max-width: 720px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 3.5rem;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    /* ---------- TITLE ---------- */
+    .main-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #f0f9ff;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      line-height: 1.2;
+      word-break: break-word;
+    }
+    .main-title span {
+      background: linear-gradient(135deg, #b6e1ff, #7fc9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      padding: 0 0.1rem;
+    }
+    .sub-headline {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.3px;
+      margin-top: -0.8rem;
+      font-weight: 300;
+    }
+
+    /* ---------- CODE BOX ---------- */
+    .code-box {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 2.2rem;
+      padding: 0.9rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      box-shadow: inset 0 8px 12px rgba(0, 0, 0, 0.3);
+    }
+    .code-box input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e8f4fd;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      padding: 0.6rem 0;
+      font-family: 'Fira Code', 'Cascadia Code', monospace;
+    }
+    .code-box input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 300;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      opacity: 0.8;
+    }
+    .code-box input:focus {
+      color: #ffffff;
+    }
+    .code-box:focus-within {
+      border-color: #7fc9ff;
+      box-shadow: 0 0 0 3px rgba(127, 201, 255, 0.2), inset 0 8px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ---------- VOICE SECTION ---------- */
+    .voice-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      width: 100%;
+      margin-top: 0.4rem;
+    }
+
+    .voice-btn {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 60px;
+      padding: 1rem 2.8rem;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #f0f9ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+      letter-spacing: 0.5px;
+      background: rgba(30, 60, 90, 0.5);
+      min-width: 200px;
+    }
+    .voice-btn:hover {
+      background: rgba(70, 140, 200, 0.3);
+      border-color: #7fc9ff;
+      transform: scale(1.02);
+      box-shadow: 0 12px 28px rgba(0, 40, 80, 0.6);
+    }
+    .voice-btn:active {
+      transform: scale(0.96);
+    }
+    .voice-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      transition: 0.2s;
+    }
+
+    .voice-message-box {
+      width: 100%;
+      max-width: 440px;
+      min-height: 4rem;
+      background: #cc0000;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 40px;
+      padding: 1rem 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 300;
+      word-break: break-word;
+      text-align: center;
+      line-height: 1.5;
+      gap: 0.5rem;
+    }
+    .voice-message-box.has-msg {
+      border-color: rgba(127, 201, 255, 0.3);
+      background: #cc0000;
+    }
+    .voice-message-box .msg-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .voice-message-box .msg-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: #ffffff;
+      stroke-width: 2;
+      fill: none;
+    }
+    .voice-message-box #messageText {
+      background-color: transparent;
+      color: #ffffff;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.25);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* ---------- NEXT BUTTON ---------- */
+    .next-btn {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 60px;
+      padding: 0.9rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #f0f9ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+      letter-spacing: 0.5px;
+      background: rgba(30, 60, 90, 0.4);
+      min-width: 160px;
+      margin-top: 0.2rem;
+    }
+    .next-btn:hover {
+      background: rgba(70, 140, 200, 0.3);
+      border-color: #7fc9ff;
+      transform: scale(1.02);
+      box-shadow: 0 12px 28px rgba(0, 40, 80, 0.6);
+    }
+    .next-btn:active {
+      transform: scale(0.96);
+    }
+    .next-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      transition: 0.2s;
+    }
+
+    #voicePlayer {
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      .glass-panel {
+        padding: 2rem 1.2rem;
+        border-radius: 2.5rem;
+      }
+      .main-title {
+        font-size: 2.1rem;
+      }
+      .code-box input {
+        font-size: 1rem;
+      }
+      .voice-btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+        min-width: 160px;
+      }
+      .next-btn {
+        padding: 0.7rem 1.8rem;
+        font-size: 1rem;
+        min-width: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-panel">
+    <div class="center-content">
+
+      <!-- TITLE -->
+      <h1 class="main-title">
+        <span>IMPORTANT REGISTER PAGE</span>
+      </h1>
+      <div class="sub-headline">center · interface</div>
+
+      <!-- CODE BOX -->
+      <div class="code-box">
+        <input type="text" id="codeInput" placeholder="enter the code ok" spellcheck="false" autofocus />
+      </div>
+
+      <!-- VOICE SECTION -->
+      <div class="voice-section">
+        <button class="voice-btn" id="voiceTriggerBtn">
+          <!-- Lucide: Play icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <span>CLICK HERE TO LISTEN CODE</span>
+        </button>
+
+        <div class="voice-message-box" id="voiceMessageDisplay">
+          <span class="msg-icon">
+            <!-- Lucide: Volume2 icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            </svg>
+          </span>
+          <span id="messageText">Only one time Play Listen Carefully</span>
+        </div>
+
+        <!-- NEXT BUTTON -->
+        <button class="next-btn" id="nextBtn">
+          <span>NEXT</span>
+          <!-- Lucide: ArrowRight icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+
+        <div class="status-badge" id="voiceStatus">ready</div>
+      </div>
+
+      <!-- hidden audio element for voice.mp3 -->
+      <audio id="voicePlayer" preload="auto">
+        <source src="voice.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      const voiceBtn = document.getElementById('voiceTriggerBtn');
+      const messageDisplay = document.getElementById('voiceMessageDisplay');
+      const messageText = document.getElementById('messageText');
+      const statusBadge = document.getElementById('voiceStatus');
+      const codeInput = document.getElementById('codeInput');
+      const voicePlayer = document.getElementById('voicePlayer');
+      const nextBtn = document.getElementById('nextBtn');
+
+      // ----- play voice.mp3 and update UI -----
+      function playVoiceMessage() {
+        voicePlayer.currentTime = 0;
+        voicePlayer.load();
+
+        const playPromise = voicePlayer.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              messageText.textContent = "Playing voice.mp3 · attached voice message";
+              messageDisplay.classList.add('has-msg');
+              statusBadge.textContent = 'playing...';
+              statusBadge.style.color = 'rgba(160, 220, 255, 0.9)';
+
+              voicePlayer.onended = function() {
+                statusBadge.textContent = 'voice played';
+                messageText.textContent = "voice.mp3 played · click again to replay";
+              };
+            })
+            .catch((error) => {
+              console.warn('Playback failed:', error);
+              messageText.textContent = "Could not play voice.mp3. Check file path.";
+              messageDisplay.classList.add('has-msg');
+              statusBadge.textContent = 'error';
+              statusBadge.style.color = 'rgba(255, 150, 150, 0.8)';
+
+              setTimeout(() => {
+                statusBadge.textContent = 'check voice.mp3';
+              }, 2000);
+            });
+        }
+
+        voiceBtn.style.transition = '0.1s';
+        voiceBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          voiceBtn.style.transform = 'scale(1)';
+        }, 120);
+      }
+
+      // ----- click: play voice message -----
+      voiceBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        playVoiceMessage();
+      });
+
+      // ----- NEXT button click -----
+      nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Show a message or perform action
+        statusBadge.textContent = 'next clicked';
+        statusBadge.style.color = 'rgba(160, 220, 255, 0.9)';
+        messageText.textContent = 'Moving to next step...';
+
+        // Reset after 2 seconds
+        setTimeout(() => {
+          if (voicePlayer.paused || voicePlayer.ended) {
+            statusBadge.textContent = 'ready';
+            statusBadge.style.color = '';
+            messageText.textContent = 'Only one time Play Listen Carefully';
+          }
+        }, 2000);
+
+        // Visual feedback
+        nextBtn.style.transition = '0.1s';
+        nextBtn.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          nextBtn.style.transform = 'scale(1)';
+        }, 120);
+
+        console.log('Next button clicked');
+      });
+
+      // ----- Enter in code input triggers voice -----
+      codeInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          voiceBtn.click();
+          statusBadge.textContent = 'code + voice';
+          setTimeout(() => {
+            if (voicePlayer.paused) {
+              statusBadge.textContent = 'ready';
+            }
+          }, 1000);
+        }
+      });
+
+      // ----- double-click message box to reset -----
+      messageDisplay.addEventListener('dblclick', function() {
+        voicePlayer.pause();
+        voicePlayer.currentTime = 0;
+        messageText.textContent = 'Only one time Play Listen Carefully';
+        messageDisplay.classList.remove('has-msg');
+        statusBadge.textContent = 'ready';
+        statusBadge.style.color = '';
+        messageDisplay.style.background = '#cc0000';
+        voicePlayer.onended = null;
+      });
+
+      // ----- status updates on audio events -----
+      voicePlayer.addEventListener('playing', function() {
+        statusBadge.textContent = 'playing...';
+      });
+
+      voicePlayer.addEventListener('pause', function() {
+        if (voicePlayer.currentTime > 0 && !voicePlayer.ended) {
+          statusBadge.textContent = 'paused';
+        }
+      });
+
+      voicePlayer.addEventListener('ended', function() {
+        statusBadge.textContent = 'voice played';
+        messageText.textContent = "voice.mp3 played · click again to replay";
+      });
+
+      voicePlayer.addEventListener('error', function(e) {
+        console.warn('Audio error:', e);
+        messageText.textContent = "voice.mp3 not found or unsupported.";
+        messageDisplay.classList.add('has-msg');
+        statusBadge.textContent = 'file missing';
+        statusBadge.style.color = 'rgba(255, 180, 100, 0.8)';
+      });
+
+      // ----- code input focus / blur (cosmetic) -----
+      codeInput.addEventListener('focus', function() {
+        if (!messageDisplay.classList.contains('has-msg')) {
+          statusBadge.textContent = 'typing code ...';
+        }
+      });
+      codeInput.addEventListener('blur', function() {
+        if (!messageDisplay.classList.contains('has-msg') && voicePlayer.paused) {
+          statusBadge.textContent = 'ready';
+        } else if (!voicePlayer.paused) {
+          // keep playing status
+        } else {
+          statusBadge.textContent = 'voice attached';
+        }
+      });
+
+      console.log('Interface ready — voice.mp3 attached.');
+    })();
+  </script>
+</body>
+</html>
